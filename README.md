@@ -36,11 +36,15 @@ function gift(playerId, type) {
 
 **giftTypes** - Lists out the gift types you can gift.
 > *Syntax: `/giftTypes`*
+
 ### Code
+> [!Note]
+> Optionally, you can specify a username or db id in the `ALLOWED` array. If no users are in the array, anyone can use the command.
 ```js
+ALLOWED = [];
 function playerCommand(myId, txt) {
     let split = txt.split(" ");
-    
+
     if (txt == "giftTypes") {
         api.sendMessage(myId, [
             { str: `The format is \`/gift username giftName\`\n\nValid giftables include: ${giftable.join(", ")}`, style: { color: "#cef3ff" } }
@@ -48,6 +52,11 @@ function playerCommand(myId, txt) {
         return true;
     }
     if (split[0].toLowerCase() == "gift") {
+        if (ALLOWED.length >= 1) {
+            if ((!ALLOWED.includes(api.getPlayerDbId(myId))) && (!ALLOWED.includes(api.getEntityName(myId)))) {
+                return false;
+            }
+        }
         if (split.length != 3) {
             api.sendMessage(myId, [
                 { str: `The format is \`/gift username giftName\`\n\nValid giftables include: ${giftable.join(", ")}`, style: { color: "#cef3ff" } }
