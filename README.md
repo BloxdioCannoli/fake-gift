@@ -14,7 +14,25 @@ function gift(e,a){return!!giftable.includes(a)&&("super"==a?api.matchmakePlayer
 
 ### De-minified (and documented)
 ```js
-function gift(e,a){return!!giftable.includes(a)&&("super"==a?api.matchmakePlayer(e,"classic","../../super-rank-welcome"):api.matchmakePlayer(e,"classic",`../../pack-welcome/${a}`),api.matchmakePlayer(e,"classic_survival","permalocked2"),!0)}giftable=["super","y2k","spring","astro","bee","medieval","highSociety"];
+/**
+* Sends a player to a fake gifted screen for either super or a cosmetic.
+* 
+* @param playerId - the id of the player
+* @param type - What you want to gift. Accepts either a pack, like `astro`, or `super`
+* @returns {void}
+*/
+giftable = ["super", "y2k", "spring", "astro", "bee", "medieval", "highSociety"];
+function gift(playerId, type) {
+    if (!giftable.includes(type)) { return false; }
+    if (type == "super") {
+        api.matchmakePlayer(playerId, "classic", "../../super-rank-welcome");
+    } else {
+        api.matchmakePlayer(playerId, "classic", `../../pack-welcome/${type}`);
+    }
+
+    api.matchmakePlayer(playerId, "classic_survival", "permalocked2");
+    return true;
+}
 ```
 
 ## Command
