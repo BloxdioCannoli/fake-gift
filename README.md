@@ -2,6 +2,9 @@
 > [!IMPORTANT]
 > EDUCATIONAL PURPOSES ONLY!
 
+> [!Note]
+> See an example here: https://www.youtube.com/watch?v=5u5gc263Etw
+
 ## Function
 ```js
 /**
