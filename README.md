@@ -40,14 +40,14 @@ function gift(playerId, type) {
 ### Copy and Paste
 > [!Note]
 > Optionally, you can specify a username or db id in the `ALLOWED` array. If no users are in the array, anyone can use the command.
-### Minified
+#### Minified
 ```js
 ALLOWED=[];
 
 function playerCommand(e,t){let i=t.split(" ");if("giftTypes"==t)return api.sendMessage(e,[{str:`The format is \`/gift username giftName\`\n\nValid giftables include: ${giftable.join(", ")}`,style:{color:"#cef3ff"}}]),!0;if("gift"==i[0].toLowerCase()){if(ALLOWED.length>=1&&!ALLOWED.includes(api.getPlayerDbId(e))&&!ALLOWED.includes(api.getEntityName(e)))return!1;if(3!=i.length)return api.sendMessage(e,[{str:`The format is \`/gift username giftName\`\n\nValid giftables include: ${giftable.join(", ")}`,style:{color:"#cef3ff"}}]),!0;let t;if("me"==i[1])t=e;else try{t=api.getPlayerId(i[1])}catch{return api.sendMessage(e,[{str:`${i[1]} is not a valid username.`,style:{color:"#cef3ff"}}]),!0}return gift(t,i[2])?api.sendMessage(e,[{str:`Gifted ${i[2]} to ${i[1]}.`,style:{color:"#cef3ff"}}]):api.sendMessage(e,[{str:`${i[2]} is not a valid giftable.\n\nValid giftables include: ${giftable.join(", ")}`,style:{color:"#cef3ff"}}]),!0}}
 ```
 ---
-### De-minified
+#### De-minified
 ```js
 ALLOWED = [];
 function playerCommand(myId, txt) {
