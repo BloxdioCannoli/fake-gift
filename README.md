@@ -97,7 +97,6 @@ function playerCommand(myId, txt) {
 
         let giftInput = joinAfter(txt.split(" "), 1);
         let giftType = format(giftInput);
-        api.log(`Got ${giftType}`);
 
         let status = gift(id, giftType);
         if (status) {
