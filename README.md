@@ -11,7 +11,7 @@
 * @param type - What you want to gift. Accepts either a pack, like `astro`, or `super`
 * @returns {void}
 */
-giftable = ["super", "astro", "y2k", "spring", "bee", "medieval"];
+giftable = ["super", "astro", "y2k", "spring", "bee", "medieval", "highSociety"];
 function gift(playerId, type) {
     if (!giftable.includes(type)) {return false}
     if (type == "super") {
@@ -26,22 +26,9 @@ function gift(playerId, type) {
 ```
 
 ## Command
-### Paste into World Code.
+### Paste into World Code along with the above function
 > Syntax: `/gift username type`
 ```js
-giftable = ["super", "astro", "y2k", "spring", "bee", "medieval"];
-function gift(playerId, type) {
-    if (!giftable.includes(type)) {return false}
-    if (type == "super") {
-        api.matchmakePlayer(playerId, "classic", "../../super-rank-welcome");
-    } else {
-        api.matchmakePlayer(playerId, "classic", `../../pack-welcome/${type}`);
-    }
-
-    api.matchmakePlayer(playerId, "classic_survival", "permalocked2");
-    return true;
-}
-
 function playerCommand(myId, txt) {
     let split = txt.split(" ");
     if (split[0].toLowerCase() == "gift") {
