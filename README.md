@@ -29,10 +29,10 @@ function gift(playerId, type) {
 ### Paste into World Code along with the above function
 
 ### Commands
-**gift** - Gifts a player a fake giftable. Either super or a cosmetic pack.
+**gift** - "Gifts" a player a fake giftable. Either super or a cosmetic pack.
 > *Syntax: `/gift (username | "me") type`*
-- An example would be `/gift Tom astro`, which would gift Tom the Astro pack.
-- A bad example would be `/gift Tom Astro`, which would **not** gift Tom the Astro pack.
+- An example would be `/gift Tom astro`, which would "gift" Tom the Astro pack.
+- Another example would be `/gift me high society`, which would "gift" you the High Society pack.
 
 **giftTypes** - Lists out the gift types you can gift.
 > *Syntax: `/giftTypes`*
@@ -44,7 +44,7 @@ function gift(playerId, type) {
 ```js
 ALLOWED=[];
 
-function playerCommand(e,t){let i=t.split(" ");if("giftTypes"==t)return api.sendMessage(e,[{str:`The format is \`/gift username giftName\`\n\nValid giftables include: ${giftable.join(", ")}`,style:{color:"#cef3ff"}}]),!0;if("gift"==i[0].toLowerCase()){if(ALLOWED.length>=1&&!ALLOWED.includes(api.getPlayerDbId(e))&&!ALLOWED.includes(api.getEntityName(e)))return!1;if(3!=i.length)return api.sendMessage(e,[{str:`The format is \`/gift username giftName\`\n\nValid giftables include: ${giftable.join(", ")}`,style:{color:"#cef3ff"}}]),!0;let t;if("me"==i[1])t=e;else try{t=api.getPlayerId(i[1])}catch{return api.sendMessage(e,[{str:`${i[1]} is not a valid username.`,style:{color:"#cef3ff"}}]),!0}return gift(t,i[2])?api.sendMessage(e,[{str:`Gifted ${i[2]} to ${i[1]}.`,style:{color:"#cef3ff"}}]):api.sendMessage(e,[{str:`${i[2]} is not a valid giftable.\n\nValid giftables include: ${giftable.join(", ")}`,style:{color:"#cef3ff"}}]),!0}}
+function playerCommand(e,t){let i=t.split(" ");if("giftTypes"==t)return api.sendMessage(e,[{str:`The format is \`/gift username giftName\`\n\nValid giftables include: ${giftable.join(", ")}`,style:{color:"#cef3ff"}}]),!0;if("gift"==i[0].toLowerCase()){if(ALLOWED.length>=1&&!ALLOWED.includes(api.getPlayerDbId(e))&&!ALLOWED.includes(api.getEntityName(e)))return!1;if(i.length<3)return api.sendMessage(e,[{str:`The format is \`/gift username giftName\`\n\nValid giftables include: ${giftable.join(", ")}`,style:{color:"#cef3ff"}}]),!0;let n;if("me"==i[1])n=e;else try{n=api.getPlayerId(i[1])}catch{return api.sendMessage(e,[{str:`${i[1]} is not a valid username.`,style:{color:"#cef3ff"}}]),!0}let a=joinAfter(t.split(" "),1),l=format(a);return api.log(`Got ${a}`),gift(n,l)?api.sendMessage(e,[{str:`Gifted ${i[2]} to ${i[1]}.`,style:{color:"#cef3ff"}}]):api.sendMessage(e,[{str:`${i[2]} is not a valid giftable.\n\nValid giftables include: ${giftable.join(", ")}`,style:{color:"#cef3ff"}}]),!0}}function joinAfter(e=[],t=0){return e.splice(t+1,e.length-1).join(" ")}function format(e=""){let t=e;t=t.replace(" ",""),t=t.toLowerCase();for(let e in t){let i=t;if(i=i.split(""),i[e]=i[e].toUpperCase(),i=i.join(""),giftable.includes(i))return i}return!1}
 ```
 ---
 #### De-minified
@@ -65,7 +65,7 @@ function playerCommand(myId, txt) {
                 return false;
             }
         }
-        if (split.length != 3) {
+        if (split.length < 3) {
             api.sendMessage(myId, [
                 { str: `The format is \`/gift username giftName\`\n\nValid giftables include: ${giftable.join(", ")}`, style: { color: "#cef3ff" } }
             ]);
@@ -86,7 +86,11 @@ function playerCommand(myId, txt) {
             }
         }
 
-        let status = gift(id, split[2]);
+        let giftInput=joinAfter(txt.split(" "), 1);
+        let giftType = format(giftInput);
+        api.log(`Got ${giftInput}`)
+
+        let status = gift(id, giftType);
         if (status) {
             api.sendMessage(myId, [
                 { str: `Gifted ${split[2]} to ${split[1]}.`, style: { color: "#cef3ff" } }
@@ -98,5 +102,29 @@ function playerCommand(myId, txt) {
         }
         return true;
     }
+}
+
+function joinAfter(array = [], idx = 0) {
+    let newArray = array.splice(idx + 1, array.length - 1).join(" ");
+    return newArray;
+}
+
+function format(txt = "") {
+    let text = txt;
+    text = text.replace(" ", "");
+    text = text.toLowerCase();
+
+    for (let t in text) {
+        let caseProbe = text;
+
+        caseProbe = caseProbe.split("");
+        caseProbe[t] = caseProbe[t].toUpperCase();
+        caseProbe = caseProbe.join("");
+
+        if (giftable.includes(caseProbe)) {
+            return caseProbe;
+        }
+    }
+    return false;
 }
 ```
