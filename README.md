@@ -54,12 +54,11 @@ function gift(playerId, type) {
 ```js
 ALLOWED=[];
 
-function playerCommand(e,t){let i=t.split(" ");if("giftTypes"==t)return api.sendMessage(e,[{str:`The format is \`/gift username giftName\`\n\nValid giftables include: ${giftable.join(", ")}`,style:{color:"#cef3ff"}}]),!0;if("gift"==i[0].toLowerCase()){if(ALLOWED.length>=1&&!ALLOWED.includes(api.getPlayerDbId(e))&&!ALLOWED.includes(api.getEntityName(e)))return!1;if(i.length<3)return api.sendMessage(e,[{str:`The format is \`/gift username giftName\`\n\nValid giftables include: ${giftable.join(", ")}`,style:{color:"#cef3ff"}}]),!0;let n;if("me"==i[1])n=e;else try{n=api.getPlayerId(i[1])}catch{return api.sendMessage(e,[{str:`${i[1]} is not a valid username.`,style:{color:"#cef3ff"}}]),!0}let a=joinAfter(t.split(" "),1),l=format(a);return api.log(`Got ${a}`),gift(n,l)?api.sendMessage(e,[{str:`Gifted ${i[2]} to ${i[1]}.`,style:{color:"#cef3ff"}}]):api.sendMessage(e,[{str:`${i[2]} is not a valid giftable.\n\nValid giftables include: ${giftable.join(", ")}`,style:{color:"#cef3ff"}}]),!0}}function joinAfter(e=[],t=0){return e.splice(t+1,e.length-1).join(" ")}function format(e=""){let t=e;t=t.replace(" ",""),t=t.toLowerCase();for(let e in t){let i=t;if(i=i.split(""),i[e]=i[e].toUpperCase(),i=i.join(""),giftable.includes(i))return i}return!1}
+function playerCommand(e,t){let i=t.split(" ");if("giftTypes"==t)return api.sendMessage(e,[{str:`The format is \`/gift username giftName\`\n\nValid giftables include: ${giftable.join(", ")}`,style:{color:"#cef3ff"}}]),!0;if("gift"==i[0].toLowerCase()){if(ALLOWED.length>=1&&!ALLOWED.includes(api.getPlayerDbId(e))&&!ALLOWED.includes(api.getEntityName(e)))return!1;if(i.length<3)return api.sendMessage(e,[{str:`The format is \`/gift username giftName\`\n\nValid giftables include: ${giftable.join(", ")}`,style:{color:"#cef3ff"}}]),!0;let n;if("me"==i[1])n=e;else try{n=api.getPlayerId(i[1])}catch{return api.sendMessage(e,[{str:`${i[1]} is not a valid username.`,style:{color:"#cef3ff"}}]),!0}let l=format(joinAfter(t.split(" "),1));return api.log(`Got ${l}`),gift(n,l)?api.sendMessage(e,[{str:`Gifted ${i[2]} to ${i[1]}.`,style:{color:"#cef3ff"}}]):api.sendMessage(e,[{str:`${i[2]} is not a valid giftable.\n\nValid giftables include: ${giftable.join(", ")}`,style:{color:"#cef3ff"}}]),!0}}function joinAfter(e=[],t=0){return e.splice(t+1,e.length-1).join(" ")}function format(e=""){let t=e;if(t=t.replace(" ",""),t=t.toLowerCase(),giftable.includes(t))return t;for(let e in t){let i=t;if(i=i.split(""),i[e]=i[e].toUpperCase(),i=i.join(""),giftable.includes(i))return i}return!1}
 ```
 ---
 #### De-minified
 ```js
-ALLOWED = [];
 function playerCommand(myId, txt) {
     let split = txt.split(" ");
 
@@ -96,9 +95,9 @@ function playerCommand(myId, txt) {
             }
         }
 
-        let giftInput=joinAfter(txt.split(" "), 1);
+        let giftInput = joinAfter(txt.split(" "), 1);
         let giftType = format(giftInput);
-        api.log(`Got ${giftInput}`)
+        api.log(`Got ${giftType}`);
 
         let status = gift(id, giftType);
         if (status) {
@@ -124,6 +123,7 @@ function format(txt = "") {
     text = text.replace(" ", "");
     text = text.toLowerCase();
 
+    if (giftable.includes(text)) { return text ;}
     for (let t in text) {
         let caseProbe = text;
 
