@@ -9,6 +9,7 @@
 
 ### Minified (uncodumented)
 ```js
+function gift(e,a){return!!giftable.includes(a)&&("super"==a?api.matchmakePlayer(e,"classic","../../super-rank-welcome"):api.matchmakePlayer(e,"classic",`../../pack-welcome/${a}`),api.matchmakePlayer(e,"classic_survival","permalocked2"),!0)}giftable=["super","y2k","spring","astro","bee","medieval","highSociety"];
 ```
 
 ### De-minified (and documented)
