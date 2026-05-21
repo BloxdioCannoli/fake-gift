@@ -1,6 +1,6 @@
 # Fake Gift Info
 > [!IMPORTANT]
-> EDUCATIONAL PURPOSES ONLY!
+> EDUCATIONAL PURPOSES ONLY! Do not use to scam players. I am not responsible for any issues that may arise.
 
 ## How it works
 We can make use of `../` in `api.matchmakePlayer` to go to (mostly) any url in Bloxd.io. Using this, we can do to a purchase confirmation URL such as `https://bloxd.io/super-rank-welcome` or `https://bloxd.io/pack-welcome/:pack` (eg `https://bloxd.io/pack-welcome/astro`). However, `api.matchmakePlayer(playerId, "../../[purchase URL]")` on its own does not do what we want it to. Instead, it hides the UI and requires the player to reload their page in order to see it. We fix this by reloading *as soon as possible.* So GlitchHunter, FatalErrors and I did some testing, and crashing the game doesn't work. Neither does kicking the player. However, I discovered I could matchmake the player a second time into a full lobby, and then realized this also works for *locked* lobbies.
