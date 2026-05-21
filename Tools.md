@@ -1,6 +1,6 @@
 # Fake Gift Tools
 > [!IMPORTANT]
-> EDUCATIONAL PURPOSES ONLY!
+> EDUCATIONAL PURPOSES ONLY! Do not use to scam players. I am not responsible for any issues that may arise.
 
 ## Function
 
