@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> fake-gift is now deprecated due to an update the devs made to matchmaking.
+
 # Fake Gift Info
 > [!IMPORTANT]
 > EDUCATIONAL PURPOSES ONLY! Do not use to scam players. I am not responsible for any issues that may arise.
